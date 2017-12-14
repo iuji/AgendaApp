@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import br.com.tsmo.agenda.dao.AlunoDAO;
 import br.com.tsmo.agenda.modelo.Aluno;
 
@@ -20,7 +22,13 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
+        Intent intent = getIntent();
+        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
         helper = new FormularioHelper(this);
+        if(aluno != null){
+            helper.preencheFormulario(aluno);
+        }
+
     }
 
     @Override
@@ -36,7 +44,12 @@ public class FormularioActivity extends AppCompatActivity {
                 Aluno aluno = helper.pegaAluno();
                 AlunoDAO dao = new AlunoDAO(this);
 
-                dao.insere(aluno);
+                if(aluno.getId() != null){
+                    dao.altera(aluno);
+                }else{
+                    dao.insere(aluno);
+                }
+
                 dao.close();
                 Toast.makeText(FormularioActivity.this, "Aluno "+ aluno.getNome()+ " Salvo", Toast.LENGTH_SHORT).show();
 

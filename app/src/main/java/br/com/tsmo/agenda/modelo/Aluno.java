@@ -1,10 +1,12 @@
 package br.com.tsmo.agenda.modelo;
 
+import java.io.Serializable;
+
 /**
  * Created by tsmo on 11/12/17.
  */
 
-public class Aluno {
+public class Aluno implements Serializable{
     private Long id;
     private String nome;
     private String endereco;
