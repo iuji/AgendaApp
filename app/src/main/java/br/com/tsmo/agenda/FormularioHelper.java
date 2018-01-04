@@ -38,7 +38,7 @@ public class FormularioHelper {
 
     public void preencheFormulario(Aluno aluno) {
         campoNome.setText(aluno.getNome());
-        campoEndereco.setText(aluno.getTelefone());
+        campoEndereco.setText(aluno.getEndereco());
         campoTelefone.setText(aluno.getTelefone());
         campoSite.setText(aluno.getSite());
         campoNota.setProgress(aluno.getNota().intValue());
